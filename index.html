@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Power Leadership Assessment - Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .main-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-step {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .progress-step.active {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .progress-step.completed {
+            color: #4ade80;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option-card h4 {
+            color: #334155;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .option-card p {
+            color: #64748b;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .slider-container {
+            margin-bottom: 25px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .slider-label {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .slider-value {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .slider-description {
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #94a3b8;
+            margin-right: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .result-card p {
+            color: #475569;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .score-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .time-estimate {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 25px;
+            }
+
+            .main-title {
+                font-size: 1.8em;
+            }
+
+            .progress-bar {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+
+            .progress-step {
+                padding: 4px 8px;
+            }
+
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn-secondary {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: #667eea;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            z-index: 1000;
+            font-weight: normal;
+        }
+    
+        /* Rank Badge Styles */
+        .rank-badge {
+            display: inline-block;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 15px;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+        
+        .rank-badge.captain {
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+            box-shadow: 0 8px 20px rgba(148, 163, 184, 0.4);
+        }
+        
+        .rank-badge.player {
+            background: linear-gradient(135deg, #cd7f32 0%, #b8692c 100%);
+            box-shadow: 0 8px 20px rgba(205, 127, 50, 0.4);
+        }
+        
+        /* Commendation Box */
+        .commendation {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .commendation h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .commendation p {
+            color: white;
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .achievement-icons {
+            margin-top: 20px;
+        }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">LEAGUE OF NATIONS • SOCIÉTÉ DES NATIONS</div>
+            <h1 class="main-title">Do you have the smart power?</h1>
+            <p class="subtitle">Have you got what it takes to lead your country? Take the 5 smart power tests.</p>
+            <p class="time-estimate">⏱️ Estimated time: 5-7 minutes</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-step" data-step="0">Start</div>
+            <div class="progress-step" data-step="1">Cycle</div>
+            <div class="progress-step" data-step="2">State</div>
+            <div class="progress-step" data-step="3">Powers</div>
+            <div class="progress-step" data-step="4">Revolutions</div>
+            <div class="progress-step" data-step="5">Crisis</div>
+            <div class="progress-step" data-step="6">Results</div>
+        </div>
+
+        <!-- Screen 0: Get Ready -->
+        <div class="card screen" id="screen-0">
+            <h2>Choose your country</h2>
+            <p>Select the nation you want to assess:</p>
+            <select id="country-select">
+                <option value="">Select your nation...</option>
+                <option value="USA">United States</option>
+                <option value="China">China</option>
+                <option value="UK">United Kingdom</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Japan">Japan</option>
+                <option value="India">India</option>
+                <option value="Russia">Russia</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Italy">Italy</option>
+                <option value="Spain">Spain</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Other">Other</option>
+            </select>
+            <button class="btn" onclick="startAssessment()">Are you ready to take the path to power?</button>
+        </div>
+
+        <!-- Screen 1: Cycle Analysis -->
+        <div class="card screen hidden" id="screen-1">
+            <h2>Test 1: Cycle Analysis<span class="tooltip" data-tip="Based on Thucydides Trap theory">ℹ️</span></h2>
+            <p>What stage of the Thucydides Cycle is your nation currently in? Like a football season, every nation goes through different phases!</p>
+            <div class="option-grid" id="cycle-options">
+                <div class="option-card" data-value="1" onclick="selectOption(1, '1')">
+                    <h4>1. Build</h4>
+                    <p>Foundation Phase (0-2 years) - Pre-season training</p>
+                </div>
+                <div class="option-card" data-value="2" onclick="selectOption(1, '2')">
+                    <h4>2. Momentum</h4>
+                    <p>Growth Phase (3-8 years) - Early season form</p>
+                </div>
+                <div class="option-card" data-value="3" onclick="selectOption(1, '3')">
+                    <h4>3. Challenger</h4>
+                    <p>Competition Phase (9-15 years) - Fighting for promotion</p>
+                </div>
+                <div class="option-card" data-value="4" onclick="selectOption(1, '4')">
+                    <h4>4. Zenith</h4>
+                    <p>Peak Phase (16-25 years) - Champions League football</p>
+                </div>
+                <div class="option-card" data-value="5" onclick="selectOption(1, '5')">
+                    <h4>5. Pressures</h4>
+                    <p>Stress Phase (26-35 years) - Squad needs refreshing</p>
+                </div>
+                <div class="option-card" data-value="6" onclick="selectOption(1, '6')">
+                    <h4>6. Overreach</h4>
+                    <p>Strain Phase (36-45 years) - Overspending in transfer market</p>
+                </div>
+                <div class="option-card" data-value="7" onclick="selectOption(1, '7')">
+                    <h4>7. Decline</h4>
+                    <p>Retreat Phase (46-60 years) - Mid-table mediocrity</p>
+                </div>
+                <div class="option-card" data-value="8" onclick="selectOption(1, '8')">
+                    <h4>8. Fall</h4>
+                    <p>Collapse Phase (60+ years) - Relegation battle</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousScreen()">← Back</button>
+                <button class="btn" onclick="nextScreen()" id="next-1" disabled>Next →</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: State Strength -->
+        <div class="card screen hidden" id="screen-2">
+            <h2>Test 2: State Strength</h2>
+            <p>What type of manager does your nation have? Every team needs the right leadership style to succeed!</p>
+            <div class="option-grid" id="leadership-options">
+                <div class="option-card" data-value="democratic" onclick="selectOption(2, 'democratic')">
+                    <h4>Democratic Leader</h4>
+                    <p>Team consensus builder - Pep Guardiola style</p>
+                </div>
+                <div class="option-card" data-value="autocratic" onclick="selectOption(2, 'autocratic')">
+                    <h4>Autocratic Leader</h4>
+                    <p>Iron fist manager - Sir Alex Ferguson approach</p>
+                </div>
+                <div class="option-card" data-value="transformational" onclick="selectOption(2, 'transformational')">
+                    <h4>Transformational Leader</h4>
+                    <p>Revolutionary tactician - Jurgen Klopp energy</p>
+                </div>
+                <div class="option-card" data-value="servant" onclick="selectOption(2, 'servant')">
+                    <h4>Servant Leader</h4>
+                    <p>Player-first coach - supportive team builder</p>
+                </div>
+                <div class="option-card" data-value="bureaucratic" onclick="selectOption(2, 'bureaucratic')">
+                    <h4>Bureaucratic Leader</h4>
+                    <p>By-the-book manager - follows FA regulations strictly</p>
+                </div>
+                <div class="option-card" data-value="laissez-faire" onclick="selectOption(2, 'laissez-faire')">
+                    <h4>Laissez-Faire Leader</h4>
+                    <p>Hands-off approach - let the star players decide</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousScreen()">← Back</button>
+                <button class="btn" onclick="nextScreen()" id="next-2" disabled>Next →</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Smart Powers -->
+        <div class="card screen hidden" id="screen-3">
+            <h2>Test 3: Smart Powers</h2>
+            <p>Rate your nation's strength in each Smart Power domain (1-10): Every great team has standout departments!</p>
+            
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Economic Power</span>
+                    <span class="slider-value" id="value-economic">5</span>
+                </div>
+                <p class="slider-description">Financial muscle - Man City's transfer budget</p>
+                <input type="range" min="1" max="10" value="5" id="economic" oninput="updateSlider('economic')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Military Power</span>
+                    <span class="slider-value" id="value-military">5</span>
+                </div>
+                <p class="slider-description">Defensive strength - Atletico Madrid's backline</p>
+                <input type="range" min="1" max="10" value="5" id="military" oninput="updateSlider('military')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">State Power</span>
+                    <span class="slider-value" id="value-state">5</span>
+                </div>
+                <p class="slider-description">Institutional backbone - Bayern Munich's structure</p>
+                <input type="range" min="1" max="10" value="5" id="state" oninput="updateSlider('state')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">People Power</span>
+                    <span class="slider-value" id="value-people">5</span>
+                </div>
+                <p class="slider-description">Squad depth - Barcelona's La Masia academy</p>
+                <input type="range" min="1" max="10" value="5" id="people" oninput="updateSlider('people')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Energy Power</span>
+                    <span class="slider-value" id="value-energy">5</span>
+                </div>
+                <p class="slider-description">Stamina & endurance - Liverpool's gegenpressing</p>
+                <input type="range" min="1" max="10" value="5" id="energy" oninput="updateSlider('energy')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Cultural Power</span>
+                    <span class="slider-value" id="value-cultural">5</span>
+                </div>
+                <p class="slider-description">Global appeal - Real Madrid's galáctico brand</p>
+                <input type="range" min="1" max="10" value="5" id="cultural" oninput="updateSlider('cultural')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Diplomatic Power</span>
+                    <span class="slider-value" id="value-diplomatic">5</span>
+                </div>
+                <p class="slider-description">Alliance building - UEFA negotiation skills</p>
+                <input type="range" min="1" max="10" value="5" id="diplomatic" oninput="updateSlider('diplomatic')">
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousScreen()">← Back</button>
+                <button class="btn" onclick="nextScreen()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Revolution Leadership -->
+        <div class="card screen hidden" id="screen-4">
+            <h2>Test 4: Revolution Leadership</h2>
+            <p>Rate your leadership in each revolution (1-10): Are you setting the trends or following the pack?</p>
+            
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Economic Revolution</span>
+                    <span class="slider-value" id="value-rev-economic">5</span>
+                </div>
+                <p class="slider-description">Digital economy innovation - like introducing VAR technology</p>
+                <input type="range" min="1" max="10" value="5" id="rev-economic" oninput="updateSlider('rev-economic')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Military Revolution</span>
+                    <span class="slider-value" id="value-rev-military">5</span>
+                </div>
+                <p class="slider-description">Defense tactics evolution - revolutionary pressing systems</p>
+                <input type="range" min="1" max="10" value="5" id="rev-military" oninput="updateSlider('rev-military')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">State Revolution</span>
+                    <span class="slider-value" id="value-rev-state">5</span>
+                </div>
+                <p class="slider-description">Governance transformation - new league structures</p>
+                <input type="range" min="1" max="10" value="5" id="rev-state" oninput="updateSlider('rev-state')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">People Revolution</span>
+                    <span class="slider-value" id="value-rev-people">5</span>
+                </div>
+                <p class="slider-description">Social change leadership - fan engagement innovation</p>
+                <input type="range" min="1" max="10" value="5" id="rev-people" oninput="updateSlider('rev-people')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Energy Revolution</span>
+                    <span class="slider-value" id="value-rev-energy">5</span>
+                </div>
+                <p class="slider-description">Sustainability leadership - green stadium technology</p>
+                <input type="range" min="1" max="10" value="5" id="rev-energy" oninput="updateSlider('rev-energy')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Cultural Revolution</span>
+                    <span class="slider-value" id="value-rev-cultural">5</span>
+                </div>
+                <p class="slider-description">Global influence - worldwide football culture</p>
+                <input type="range" min="1" max="10" value="5" id="rev-cultural" oninput="updateSlider('rev-cultural')">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Diplomatic Revolution</span>
+                    <span class="slider-value" id="value-rev-diplomatic">5</span>
+                </div>
+                <p class="slider-description">International relations - FIFA reform leadership</p>
+                <input type="range" min="1" max="10" value="5" id="rev-diplomatic" oninput="updateSlider('rev-diplomatic')">
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousScreen()">← Back</button>
+                <button class="btn" onclick="nextScreen()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Crisis Management -->
+        <div class="card screen hidden" id="screen-5">
+            <h2>Test 5: Crisis Management</h2>
+            <p>What's your biggest threat this season? Every champion has to navigate major challenges!</p>
+            <div class="option-grid" id="crisis-options">
+                <div class="option-card" data-value="economic" onclick="selectOption(5, 'economic')">
+                    <h4>Economic Crisis</h4>
+                    <p>Financial fair play violations - transfer budget cuts</p>
+                </div>
+                <div class="option-card" data-value="military" onclick="selectOption(5, 'military')">
+                    <h4>Military Crisis</h4>
+                    <p>Defense breakdown - shipping goals every match</p>
+                </div>
+                <div class="option-card" data-value="state" onclick="selectOption(5, 'state')">
+                    <h4>State Crisis</h4>
+                    <p>Management chaos - boardroom power struggles</p>
+                </div>
+                <div class="option-card" data-value="people" onclick="selectOption(5, 'people')">
+                    <h4>People Crisis</h4>
+                    <p>Squad rebellion - player unrest in dressing room</p>
+                </div>
+                <div class="option-card" data-value="energy" onclick="selectOption(5, 'energy')">
+                    <h4>Energy Crisis</h4>
+                    <p>Stamina shortage - team exhaustion from too many fixtures</p>
+                </div>
+                <div class="option-card" data-value="cultural" onclick="selectOption(5, 'cultural')">
+                    <h4>Cultural Crisis</h4>
+                    <p>Identity loss - abandoning club traditions</p>
+                </div>
+                <div class="option-card" data-value="diplomatic" onclick="selectOption(5, 'diplomatic')">
+                    <h4>Diplomatic Crisis</h4>
+                    <p>Alliance breakdown - falling out with key partners</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="previousScreen()">← Back</button>
+                <button class="btn" onclick="calculateResults()" id="next-5" disabled>See My Results →</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Results -->
+        <div class="card screen hidden" id="screen-6">
+            <h2 style="text-align: center; margin-bottom: 30px;">Your Smart Power Assessment Results</h2>
+            
+            <!-- Rank Badge -->
+            <div style="text-align: center;">
+                <div class="rank-badge" id="rank-badge">MANAGER</div>
+            </div>
+            
+            <!-- Overall Score -->
+            <div class="score-display" id="overall-score">75/100</div>
+            
+            <!-- Commendation Box -->
+            <div class="commendation" id="commendation">
+                <h3>🏆 Outstanding Leadership!</h3>
+                <p id="commendation-text">You have demonstrated exceptional strategic thinking and comprehensive understanding of smart power dynamics.</p>
+                <div class="achievement-icons" id="achievements"></div>
+            </div>
+
+            <!-- Test Breakdown -->
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; margin: 30px 0; backdrop-filter: blur(10px);">
+                <h3 style="text-align: center; color: white; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">📊 Your Performance Breakdown</h3>
+                <div id="test-scores" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                    <!-- Test scores will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- NEW BANNER - Replaces Email Signup Box -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 40px 30px; margin: 30px 0; text-align: center; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);">
+                <h2 style="color: white; font-size: 2.2em; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700;">
+                    Unlock your potential
+                </h2>
+                <p style="color: white; font-size: 1.3em; margin-bottom: 20px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+                    Get your complete League of Nations report with:
+                </p>
+                <div style="text-align: left; display: inline-block; margin-bottom: 25px; max-width: 500px;">
+                    <div style="color: white; font-size: 1.15em; line-height: 2.2; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+                        <div style="margin-bottom: 8px;">• Detailed power breakdown</div>
+                        <div style="margin-bottom: 8px;">• Historical comparisons & precedents</div>
+                        <div style="margin-bottom: 8px;">• Strategic recommendations</div>
+                    </div>
+                </div>
+                <p style="color: white; font-size: 1.5em; font-weight: 700; margin: 20px 0 0 0; text-shadow: 2px 2px 3px rgba(0,0,0,0.3);">
+                    Be a player. Join the League. Sign up here. 👇
+                </p>
+            </div>
+
+            <!-- Restart Button -->
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="btn btn-secondary" onclick="restartAssessment()" style="margin-top: 15px;">
+                    ↻ Take Assessment Again
+                </button>
+            </div>
+        </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: #666; margin-bottom: 20px;">Well done! Want deeper insights? Get your complete 7-page Smart Power briefing with detailed analysis, historical comparisons, and strategic recommendations.</p>
+                <button class="btn" onclick="unlockReport()">🔓 Unlock Your Full Strategic Report</button>
+                <br><br>
+                <button class="btn btn-secondary" onclick="restartAssessment()" style="margin-top: 10px;">↻ Take Assessment Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentScreen = 0;
+        let assessmentData = {
+            country: '',
+            cycle: null,
+            leadership: null,
+            powers: {},
+            revolutions: {},
+            crisis: null
+        };
+
+        function updateProgress() {
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                if (index < currentScreen) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index === currentScreen) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function startAssessment() {
+            const country = document.getElementById('country-select').value;
+            if (!country) {
+                alert('Please select a country first!');
+                return;
+            }
+            assessmentData.country = country;
+            nextScreen();
+        }
+
+        function nextScreen() {
+            document.getElementById(`screen-${currentScreen}`).classList.add('hidden');
+            currentScreen++;
+            document.getElementById(`screen-${currentScreen}`).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function previousScreen() {
+            document.getElementById(`screen-${currentScreen}`).classList.add('hidden');
+            currentScreen--;
+            document.getElementById(`screen-${currentScreen}`).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function selectOption(screen, value) {
+            // Remove selection from all cards in current screen
+            const container = document.getElementById(`screen-${screen}`);
+            container.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.target.closest('.option-card').classList.add('selected');
+            
+            // Store the value
+            if (screen === 1) {
+                assessmentData.cycle = value;
+                document.getElementById('next-1').disabled = false;
+            } else if (screen === 2) {
+                assessmentData.leadership = value;
+                document.getElementById('next-2').disabled = false;
+            } else if (screen === 5) {
+                assessmentData.crisis = value;
+                document.getElementById('next-5').disabled = false;
+            }
+        }
+
+        function updateSlider(id) {
+            const slider = document.getElementById(id);
+            const valueDisplay = document.getElementById(`value-${id}`);
+            valueDisplay.textContent = slider.value;
+            
+            // Store the value
+            if (id.startsWith('rev-')) {
+                assessmentData.revolutions[id.replace('rev-', '')] = parseInt(slider.value);
+            } else {
+                assessmentData.powers[id] = parseInt(slider.value);
+            }
+        }
+
+        
+        // Ranking System
+        function getRank(score) {
+            if (score >= 75) return 'MANAGER';
+            if (score >= 55) return 'CAPTAIN';
+            return 'PLAYER';
+        }
+
+        function displayRankAndCommendation(rank, score, data) {
+            const rankBadge = document.getElementById('rank-badge');
+            const commendationText = document.getElementById('commendation-text');
+            const achievementsDiv = document.getElementById('achievements');
+            
+            // Set rank badge
+            rankBadge.textContent = rank;
+            rankBadge.className = 'rank-badge ' + rank.toLowerCase();
+            
+            // Set commendation based on rank
+            let commendation = '';
+            if (rank === 'MANAGER') {
+                commendation = '🏆 Elite Leadership! You demonstrate exceptional strategic thinking and comprehensive understanding of smart power dynamics. Your leadership style combines vision with execution excellence.';
+            } else if (rank === 'CAPTAIN') {
+                commendation = '⭐ Strong Leadership! You show solid strategic capabilities and good understanding of power dynamics. Continue developing your leadership skills to reach elite status.';
+            } else {
+                commendation = '💪 Emerging Leader! You have foundational leadership abilities. Focus on strengthening your strategic thinking and power domain expertise to advance your leadership impact.';
+            }
+            commendationText.textContent = commendation;
+            
+            // Add achievement badges based on top powers
+            const powers = data.powers;
+            const topPowers = Object.entries(powers)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3)
+                .map(([power]) => power);
+            
+            let badges = '';
+            topPowers.forEach(power => {
+                const emoji = {
+                    'economic': '💰',
+                    'military': '⚔️',
+                    'state': '🏛️',
+                    'people': '👥',
+                    'energy': '⚡',
+                    'cultural': '🎭',
+                    'diplomatic': '🤝'
+                }[power];
+                const name = power.charAt(0).toUpperCase() + power.slice(1);
+                badges += `<span style="display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin: 5px; font-size: 0.95em;">${emoji} ${name} Expert</span>`;
+            });
+            achievementsDiv.innerHTML = badges;
+        }
+
+        // Test Breakdown Display
+        function displayTestBreakdown(cycleScore, leadershipScore, powersScore, revolutionsScore, crisisScore, totalScore) {
+            const testScoresDiv = document.getElementById('test-scores');
+            
+            const tests = [
+                { icon: '🔄', name: 'Test 1: Cycle Analysis', score: cycleScore, max: 20 },
+                { icon: '👤', name: 'Test 2: Leadership Style', score: leadershipScore, max: 15 },
+                { icon: '💪', name: 'Test 3: Smart Powers', score: powersScore, max: 35 },
+                { icon: '🚀', name: 'Test 4: Revolution Leadership', score: revolutionsScore, max: 20 },
+                { icon: '⚠️', name: 'Test 5: Crisis Management', score: crisisScore, max: 10 }
+            ];
+            
+            let html = '';
+            tests.forEach(test => {
+                const percentage = Math.round((test.score / test.max) * 100);
+                let color = '#ef4444'; // Red
+                if (percentage >= 75) color = '#22c55e'; // Green
+                else if (percentage >= 50) color = '#eab308'; // Yellow
+                
+                html += `
+                    <div style="background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border-radius: 12px; padding: 20px; text-align: center; border-left: 5px solid ${color}; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                        <div style="font-size: 3em; margin-bottom: 10px;">${test.icon}</div>
+                        <div style="color: white; font-size: 1.1em; font-weight: 600; margin-bottom: 8px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">${test.name}</div>
+                        <div style="color: white; font-size: 2em; font-weight: bold; margin: 10px 0; text-shadow: 2px 2px 3px rgba(0,0,0,0.3);">${test.score}/${test.max}</div>
+                        <div style="color: rgba(255,255,255,0.9); font-size: 1.1em; font-weight: 600;">${percentage}% Score</div>
+                    </div>
+                `;
+            });
+            
+            testScoresDiv.innerHTML = html;
+        }
+
+function calculateResults() {
+            // Calculate individual test scores
+            const cycleScore = assessmentData.cycle === 'build' ? 20 : assessmentData.cycle === 'zenith' ? 16 : 12;
+            const leadershipScore = assessmentData.leadership === 'diplomatic' ? 15 : assessmentData.leadership === 'military' ? 12 : 10;
+            
+            // Powers score (35 points max)
+            const powers = assessmentData.powers;
+            const powersTotal = Object.values(powers).reduce((sum, val) => sum + val, 0);
+            const powersScore = Math.round((powersTotal / 70) * 35);
+            
+            // Revolutions score (20 points max)
+            const revolutions = assessmentData.revolutions;
+            const revolutionsTotal = Object.values(revolutions).reduce((sum, val) => sum + val, 0);
+            const revolutionsScore = Math.round((revolutionsTotal / 70) * 20);
+            
+            // Crisis score (10 points max)
+            const crisisScore = assessmentData.crisis ? 10 : 0;
+            
+            // Calculate overall score
+            const overallScore = cycleScore + leadershipScore + powersScore + revolutionsScore + crisisScore;
+            
+            // Update overall score display
+            document.getElementById('overall-score').textContent = overallScore + '/100';
+            
+            // Get rank and display
+            const rank = getRank(overallScore);
+            
+            // Display test breakdown
+            displayTestBreakdown(cycleScore, leadershipScore, powersScore, revolutionsScore, crisisScore, overallScore);
+            
+            // Navigate to results screen
+            nextScreen();
+            
+            // Display rank and commendation AFTER navigation
+            setTimeout(() => {
+                displayRankAndCommendation(rank, overallScore, assessmentData);
+            }, 100);
+        }
+
+        function getCycleDescription(cycle) {
+            const descriptions = {
+                '1': 'Foundation building phase',
+                '2': 'Strong growth trajectory',
+                '3': 'Rising power status',
+                '4': 'Peak performance period',
+                '5': 'Facing internal pressures',
+                '6': 'Risk of overextension',
+                '7': 'Managing decline',
+                '8': 'Critical restructuring needed'
+            };
+            return descriptions[cycle];
+        }
+
+        function getRevolutionLevel(avg) {
+            if (avg >= 8) return 'Leading the pack globally';
+            if (avg >= 6) return 'Keeping pace with trends';
+            if (avg >= 4) return 'Playing catch-up';
+            return 'Falling behind - urgent action needed';
+        }
+
+        function getRecommendation(score, data) {
+            if (score >= 80) {
+                return 'Excellent position! Focus on maintaining advantages and addressing your ' + data.crisis + ' vulnerability.';
+            } else if (score >= 60) {
+                return 'Solid foundation with room for growth. Prioritize strengthening weak domains and revolution leadership.';
+            } else if (score >= 40) {
+                return 'Significant development needed. Focus on core power building and immediate crisis management.';
+            } else {
+                return 'Critical situation requiring comprehensive reform across all domains.';
+            }
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function unlockReport() {
+            alert('🎉 Feature coming soon! Enter your email to receive your comprehensive 7-page Strategic Report with detailed analysis, historical comparisons, and actionable recommendations.');
+        }
+
+        function restartAssessment() {
+            currentScreen = 0;
+            assessmentData = {
+                country: '',
+                cycle: null,
+                leadership: null,
+                powers: {},
+                revolutions: {},
+                crisis: null
+            };
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.add('hidden'));
+            document.getElementById('screen-0').classList.remove('hidden');
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('input[type="range"]').forEach(slider => slider.value = 5);
+            document.querySelectorAll('.slider-value').forEach(val => val.textContent = '5');
+            document.getElementById('country-select').value = '';
+            document.getElementById('next-1').disabled = true;
+            document.getElementById('next-2').disabled = true;
+            document.getElementById('next-5').disabled = true;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
